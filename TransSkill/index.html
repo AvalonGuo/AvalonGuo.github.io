@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>论文项目主页 - 我的研究工作</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.7;
+      color: #333;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .paper-title {
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+    .authors {
+      font-size: 1.2em;
+      color: #555;
+    }
+    .affiliation {
+      font-size: 1em;
+      color: #777;
+      margin: 5px 0;
+    }
+    .links {
+      margin: 20px 0;
+    }
+    .section {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+    code {
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1 class="paper-title">你的论文标题</h1>
+    <div class="authors">
+      作者姓名<sup>1</sup>, 指导老师<sup>2</sup>
+    </div>
+    <div class="affiliation">
+      <sup>1</sup> 你的学校/学院/实验室
+    </div>
+    <div class="affiliation">
+      <sup>2</sup> 导师单位
+    </div>
+
+    <div class="links">
+      <a href="https://arxiv.org/abs/xxxx.xxxxx">📄 论文 (arXiv)</a> |
+      <a href="https://doi.org/xx.xxxx/xxxxxx">🔍 DOI</a> |
+      <a href="https://github.com/AvalonGuo/AvalonGuo.github.io">💻 代码仓库</a> |
+      <a href="#citation">📄 引用格式</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🎯 研究简介</h2>
+    <p>
+      用 2-3 句话简要描述你的研究问题和贡献。例如：
+      本文提出了一种基于深度学习的新型方法，用于解决……在公开数据集上的实验表明，该方法比现有方法提升了 15% 的准确率。
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>🚀 项目功能</h2>
+    <ul>
+      <li>功能 1：比如支持多模态输入</li>
+      <li>功能 2：提供预训练模型</li>
+      <li>功能 3：支持自定义数据集训练</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>📦 使用方法</h2>
+    <p>克隆仓库并运行：</p>
+    <pre><code>git clone https://github.com/AvalonGuo/your-repo-name.git<br>cd your-repo-name<br>python main.py</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>📊 实验结果</h2>
+    <p>
+      在 XXX 数据集上取得了 SOTA 结果：
+    </p>
+    <ul>
+      <li>准确率：95.2%</li>
+      <li>推理速度：12ms/样本</li>
+    </ul>
+    <!-- 可选：插入图片 -->
+    <!-- <img src="results.png" alt="实验结果图" style="max-width:100%;"> -->
+  </div>
+
+  <div class="section" id="citation">
+    <h2>📄 引用格式</h2>
+    <pre style="background:#f0f0f0; padding:15px; border-radius:6px;">
+@article{guo2025yourpaper,
+  title   = {你的论文标题},
+  author  = {Guo, Avalon and Li, Mentor},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year    = {2025}
+}
+    </pre>
+  </div>
+
+  <div class="footer">
+    © 2025 AvalonGuo. 项目源码基于 MIT 许可。
+  </div>
+
+</body>
+</html>
