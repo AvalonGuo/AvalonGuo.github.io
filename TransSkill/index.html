@@ -65,17 +65,34 @@ Reinforcement Learning</title>
     code {
       font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
     }
-    .figure-placeholder {
-      background: #eee;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      margin: 1rem 0;
-      border-radius: 4px;
-      font-style: italic;
+
+    /* Figure */
+    .figure-container {
+      background: #fafafa;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      margin: 1.5rem 0;
     }
+    .figure-container img {
+      max-width: 100%;
+      height: auto;
+    }
+    .figure-caption {
+      display: block;
+      text-align: left;
+      font-style: italic;
+      font-size: 0.95em;
+      color: #222;
+      line-height: 1.5;
+      margin-top: 0.6rem;
+    }
+    .figure-caption br {
+      content: "";
+      margin: 0.4em 0; /* 控制 <br> 的上下间距 */
+      display: block;
+    }
+
     hr {
       margin: 2.5rem 0;
       border: 0;
@@ -212,8 +229,19 @@ Reinforcement Learning</title>
 <p>
   Briefly explain your approach. You can compare with baselines or highlight key insights.
 </p>
-<div class="figure-placeholder">
-  [Figure: Method illustration – to be added]
+<div class="figure-container">
+  <img src="assets/framework.svg" alt="Method illustration">
+<em style="display: block; text-align: left; margin-top: 0.5rem;">
+  <strong>Figure:</strong> Overview of <strong>TransSkill</strong>, a two-stage framework for semantic multi-task reinforcement 
+  learning.<br>  
+  <strong>Stage 1 (Skill Pretraining)</strong> first trains an encoder–decoder pair and a skill classifier on annotated expert 
+  trajectories to learn a structured latent skill space, where the classifier provides semantic regularization. A planner is 
+  then trained to predict skill distributions that match those inferred by the encoder (i.e., aligning <var>z</var><sub>p</sub> 
+  with <var>z</var><sub>e</sub>), while also receiving auxiliary semantic supervision from the same labels via a frozen classifier.<br>
+  <strong>Stage 2 (RL Finetuning)</strong> freezes the planner and trains a low-level actor within a soft actor-critic framework to 
+  execute temporally extended, skill-conditioned action chunks. This hierarchical formulation enables interpretable policies and 
+  improves sample efficiency through temporal abstraction and multi-step value estimation.
+</em>
 </div>
 
 <h2>📊 Results</h2>
@@ -225,11 +253,6 @@ Reinforcement Learning</title>
   [Plot: Learning curves or comparison table – to be added]
 </div>
 
-<h2>📦 Usage</h2>
-<pre><code>git clone https://github.com/yourname/your-repo.git
-cd your-repo
-pip install -r requirements.txt
-python main.py</code></pre>
 
 <h2 id="citation">📜 Citation</h2>
 <pre><code>@article{your2025paper,
