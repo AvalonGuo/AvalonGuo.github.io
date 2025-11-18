@@ -1,143 +1,249 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>论文项目主页 - 我的研究工作</title>
+  <title>TransSkill: Transferable Skill Chunks for Interpretable Multi-Task
+Reinforcement Learning</title>
   <style>
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      line-height: 1.7;
-      color: #333;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
       max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #f9f9f9;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      color: #222;
+      background: white;
     }
-    h1, h2, h3 {
-      color: #2c3e50;
-    }
-    a {
-      color: #3498db;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .paper-title {
+    h1 {
       font-size: 1.8em;
-      font-weight: bold;
+      margin-bottom: 0.3rem;
     }
     .authors {
-      font-size: 1.2em;
-      color: #555;
+      font-size: 1.1em;
+      margin-bottom: 1.2rem;
+      color: #444;
     }
-    .affiliation {
-      font-size: 1em;
-      color: #777;
-      margin: 5px 0;
+    .authors a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .authors a:hover {
+      text-decoration: underline;
     }
     .links {
-      margin: 20px 0;
+      margin: 1rem 0 1.8rem;
     }
-    .section {
-      background: white;
-      padding: 20px;
-      margin: 20px 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    .links a:not(.btn) {
+      margin-right: 1.2rem;
+      color: #0066cc;
+      text-decoration: none;
     }
-    .footer {
-      text-align: center;
-      margin-top: 50px;
-      color: #aaa;
-      font-size: 0.9em;
+    .links a:not(.btn):hover {
+      text-decoration: underline;
+    }
+    h2 {
+      font-size: 1.4em;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    h2::before {
+      margin-right: 0.4rem;
+    }
+    p, ul {
+      margin-bottom: 1.2rem;
+    }
+    pre {
+      background: #f6f8fa;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.95em;
     }
     code {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    }
+    .figure-placeholder {
       background: #eee;
-      padding: 2px 6px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      margin: 1rem 0;
       border-radius: 4px;
-      font-family: monospace;
+      font-style: italic;
+    }
+    hr {
+      margin: 2.5rem 0;
+      border: 0;
+      border-top: 1px solid #eee;
+    }
+    footer {
+      color: #777;
+      font-size: 0.9em;
+      text-align: center;
+    }
+    .links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1.2rem;
+      background-color: #1a1a1a;
+      color: white !important;
+      text-decoration: none;
+      border-radius: 20px;
+      font-size: 0.95em;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    /* 统一设置所有状态无下划线 */
+    .btn:link,
+    .btn:visited,
+    .btn:active {
+      color: white !important;
+      text-decoration: none;
+    }
+
+    /* 单独处理 hover，包含所有属性 */
+    .btn:hover {
+      color: white !important;
+      text-decoration: none;           
+      background-color: #333;
+      transform: translateY(-1px);
+    }
+    .block {
+        background: #4f4949;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 2rem auto;
+        max-width: 800px;
+        font-size: 1.1em;
+        line-height: 1.6;
+        color: #333;
+        text-align: left;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .block h3 {
+        color: #d81b60;
+        margin-top: 0;
+        font-weight: 600;
+        font-size: 1.6em;
+    }
+    .block span.highlight {
+        color: #0066cc;
+    }
+    .block span.emphasis {
+        color: #d81b60;
+    }
+    .content{
+        font-size: 1.1em;           /* 增大字体 */
+        line-height: 1.7;
+        color: #222;
+        margin-bottom: 1.5rem;
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1 class="paper-title">你的论文标题</h1>
-    <div class="authors">
-      作者姓名<sup>1</sup>, 指导老师<sup>2</sup>
-    </div>
-    <div class="affiliation">
-      <sup>1</sup> 你的学校/学院/实验室
-    </div>
-    <div class="affiliation">
-      <sup>2</sup> 导师单位
-    </div>
+<h1 style="text-align: center;">
+  TransSkill: Transferable Skill Chunks for Interpretable Multi-Task Reinforcement Learning
+</h1>
 
-    <div class="links">
-      <a href="https://arxiv.org/abs/xxxx.xxxxx">📄 论文 (arXiv)</a> |
-      <a href="https://doi.org/xx.xxxx/xxxxxx">🔍 DOI</a> |
-      <a href="https://github.com/AvalonGuo/AvalonGuo.github.io">💻 代码仓库</a> |
-      <a href="#citation">📄 引用格式</a>
-    </div>
+<div class="authors-container" style="text-align: center; margin-bottom: 1.5rem;">
+  <div class="authors">
+    Yudi Guo<sup>1</sup>,
+    Deping Li<sup>1</sup>
   </div>
-
-  <div class="section">
-    <h2>🎯 研究简介</h2>
-    <p>
-      用 2-3 句话简要描述你的研究问题和贡献。例如：
-      本文提出了一种基于深度学习的新型方法，用于解决……在公开数据集上的实验表明，该方法比现有方法提升了 15% 的准确率。
-    </p>
+  <div>
+    <sup>1</sup> Your Institution &nbsp;&nbsp;
   </div>
-
-  <div class="section">
-    <h2>🚀 项目功能</h2>
-    <ul>
-      <li>功能 1：比如支持多模态输入</li>
-      <li>功能 2：提供预训练模型</li>
-      <li>功能 3：支持自定义数据集训练</li>
-    </ul>
+  <div class="links">
+    <a href="https://arxiv.org/abs/xxxx.xxxxx" class="btn">📄 Paper</a>
+    <a href="https://github.com/yourname/your-repo" class="btn">💻 Code</a>
   </div>
+</div>
 
-  <div class="section">
-    <h2>📦 使用方法</h2>
-    <p>克隆仓库并运行：</p>
-    <pre><code>git clone https://github.com/AvalonGuo/your-repo-name.git<br>cd your-repo-name<br>python main.py</code></pre>
-  </div>
 
-  <div class="section">
-    <h2>📊 实验结果</h2>
-    <p>
-      在 XXX 数据集上取得了 SOTA 结果：
-    </p>
-    <ul>
-      <li>准确率：95.2%</li>
-      <li>推理速度：12ms/样本</li>
-    </ul>
-    <!-- 可选：插入图片 -->
-    <!-- <img src="results.png" alt="实验结果图" style="max-width:100%;"> -->
-  </div>
 
-  <div class="section" id="citation">
-    <h2>📄 引用格式</h2>
-    <pre style="background:#f0f0f0; padding:15px; border-radius:6px;">
-@article{guo2025yourpaper,
-  title   = {你的论文标题},
-  author  = {Guo, Avalon and Li, Mentor},
-  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+<blockquote class="block" style="background: #dddada; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; font-size: 1.1em; line-height: 1.6; color: #333;">
+  <p style="margin: 0;">
+    <span style="color: #000000; font-weight: bold;">TransSkill</span> introduces 
+    <span style="color: #d81b60; font-weight: bold;">interpretable, language-grounded skill chunks</span> (e.g., move-to, push) 
+    learned from expert demonstrations, enabling 
+    <span style="color: #d81b60; font-weight: bold;">cross-task skill generalization</span>, 
+    <span style="color: #d81b60; font-weight: bold;">transparent policy composition</span>, 
+    and <span style="color: #000000; font-weight: bold;">high sample efficiency</span>—
+    achieving competitive performance on Meta-World+ MT10 in just 2 million environment steps 
+    <span style="color: #000000; font-weight: bold;">(10% of typical training cost)</span>.
+  </p>
+</blockquote>
+
+<h2>🎯 Abstract</h2>
+<p class="content">
+  We present <span style="color: #000000; font-weight: bold;">TransSkill</span>, a simple yet effective approach to 
+  <span style="color: #000000; font-weight: bold;">multi-task reinforcement learning (MTRL)</span> that injects semantic structure into skill discovery. 
+  Addressing the opacity of latent skills in existing methods, TransSkill leverages expert-labeled trajectories to learn 
+  <span style="color: #0066cc; font-weight: bold;">interpretable and reusable skill chunks</span>—such as 
+  <em>move-to</em>, <em>push</em>, and <em>press</em>—that generalize across tasks. Within a 
+  <span style="color: #0066cc; font-weight: bold;">hierarchical framework</span>, a 
+  <span style="color: #0066cc; font-weight: bold;">high-level planner</span> selects skills conditioned on 
+  both the current observation and a natural-language-derived task embedding from a pre-trained 
+  <span style="color: #0066cc; font-weight: bold;">Sentence-BERT (SBERT) model</span>, while a 
+  <span style="color: #0066cc; font-weight: bold;">low-level SAC policy</span> executes the 
+  selected skill over a fixed horizon. Crucially, the latent skill space is regularized via a 
+  <span style="color: #d81b60; font-weight: bold;">frozen skill classifier</span> trained offline, ensuring semantic coherence without 
+  online supervision. Evaluated on the MT10 benchmark of Meta-World+, TransSkill achieves a competitive 
+  <span style="color: #d81b60; font-weight: bold;">interquartile mean (IQM) success rate of 0.807</span> within only 
+  <span style="color: #d81b60; font-weight: bold;">2 million environment steps</span>—approaching state-of-the-art performance 
+  (<span style="color: #d81b60; font-weight: bold;">0.832 at 20M steps</span>)—while providing transparent insight into skill composition, reuse, and cross-task transfer.
+</p>
+
+<h2>🚀 Method</h2>
+<p>
+  Briefly explain your approach. You can compare with baselines or highlight key insights.
+</p>
+<div class="figure-placeholder">
+  [Figure: Method illustration – to be added]
+</div>
+
+<h2>📊 Results</h2>
+<ul>
+  <li>Achieved <strong>95.2% accuracy</strong> on XXX dataset.</li>
+  <li><strong>2× faster convergence</strong> than prior offline-to-online RL methods.</li>
+</ul>
+<div class="figure-placeholder">
+  [Plot: Learning curves or comparison table – to be added]
+</div>
+
+<h2>📦 Usage</h2>
+<pre><code>git clone https://github.com/yourname/your-repo.git
+cd your-repo
+pip install -r requirements.txt
+python main.py</code></pre>
+
+<h2 id="citation">📜 Citation</h2>
+<pre><code>@article{your2025paper,
+  title   = {Your Paper Title},
+  author  = {Your Name and Advisor Name},
+  journal = {arXiv preprint arXiv:xxxx.xxxxx},
   year    = {2025}
-}
-    </pre>
-  </div>
+}</code></pre>
 
-  <div class="footer">
-    © 2025 AvalonGuo. 项目源码基于 MIT 许可。
-  </div>
+<hr>
+<footer>
+  © 2025 Your Name. Inspired by <a href="https://colinqiyangli.github.io/qc/" style="color:#777;">QC</a>.
+</footer>
 
 </body>
+</html>
 </html>
