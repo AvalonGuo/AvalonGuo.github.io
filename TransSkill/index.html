@@ -168,6 +168,24 @@ Reinforcement Learning</title>
         color: #222;
         margin-bottom: 1.5rem;
     }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .video-item video {
+      width: 100%;
+      border-radius: 6px;
+      background: #000;
+    }
+    .video-item p {
+      text-align: center;
+      font-size: 0.9em;
+      margin-top: 0.3rem;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -253,7 +271,29 @@ Reinforcement Learning</title>
 <div class="figure-container">
   <img src="assets/comparison_exp.png" alt="Comparison experiment illustration">
 </div>
+<h2>🎥 Skill Execution Examples</h2>
+<p>We show execution videos on all 10 MT10 tasks...</p>
 
+<h3>✅ Successful Tasks</h3>
+<div class="video-grid">
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/push-v3.mp4" type="video/mp4"></video>
+    <p><strong>push</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="videos/reach.mp4" type="video/mp4"></video>
+    <p><strong>reach</strong> — Success</p>
+  </div>
+  <!-- ... 其他成功任务 -->
+</div>
+
+<h3>❌ Failure Cases</h3>
+<div class="video-grid">
+  <div class="video-item">
+    <video controls muted playsinline><source src="videos/hammer.mp4" type="video/mp4"></video>
+    <p><strong>hammer</strong> — Failed (missed nail)</p>
+  </div>
+</div>
 
 <h2 id="citation">📜 Citation</h2>
 <pre><code>@article{your2025paper,
