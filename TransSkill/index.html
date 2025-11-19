@@ -261,6 +261,17 @@ Reinforcement Learning</title>
   improves sample efficiency through temporal abstraction and multi-step value estimation.
 </em>
 </div>
+<h2>🧩 Structured Skill Space via Semantic Regularization</h2>
+<div class="figure-container">
+  <img src="assets/tsne_skill_planner_horizon5.png" alt="t-SNE of planner skill embeddings z_p" style="width:80%; max-width:800px;">
+  <em style="display: block; text-align: left; margin-top: 0.5rem;">
+  t-SNE of planner-sampled continuous skill codes <var>z</var><sub>p</sub>  on MT10 expert trajectories.  
+  Each point is one <var>z</var><sub>p</sub>  (a single skill selection); colors denote ground-truth semantic labels  
+  (e.g., <code>push</code>, <code>pull</code>, <code>move_to</code>).  
+  Despite using only observations and task embeddings—and no skill labels at test time—the outputs cluster by semantics,  
+  revealing a <strong>structured, interpretable latent policy space</strong> learned in Stage 1.
+  </em>
+</div>
 
 <h2>📊 Results</h2>
 <ul>
@@ -271,27 +282,58 @@ Reinforcement Learning</title>
 <div class="figure-container">
   <img src="assets/comparison_exp.png" alt="Comparison experiment illustration">
 </div>
-<h2>🎥 Skill Execution Examples</h2>
-<p>We show execution videos on all 10 MT10 tasks...</p>
+<h2>🎨 Interpretable Policy Execution with Skill-Colored Trajectories</h2>
+<p>
+  Robot trajectories on MT10 tasks are visualized with colors indicating the 
+  atomic skill selected by the high-level policy at each step <strong>(one color = one skill)</strong>. 
+  For clarity and brevity, we show 5 representative episodes per task, 
+  drawn from the standard 50-episode evaluation protocol.</p>
 
 <h3>✅ Successful Tasks</h3>
 <div class="video-grid">
   <div class="video-item">
-    <video controls muted playsinline><source src="assets/videos/push-v3.mp4" type="video/mp4"></video>
+    <video controls muted playsinline><source src="assets/videos/push-v3_web.mp4" type="video/mp4"></video>
     <p><strong>push</strong> — Success</p>
   </div>
   <div class="video-item">
-    <video controls muted playsinline><source src="videos/reach.mp4" type="video/mp4"></video>
-    <p><strong>reach</strong> — Success</p>
+    <video controls muted playsinline><source src="assets/videos/door-open-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>door open</strong> — Success</p>
   </div>
-  <!-- ... 其他成功任务 -->
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/drawer-open-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>drawer open</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/drawer-close-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>drawer close</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/button-press-topdown-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>button press topdown</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/window-open-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>windown open</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/window-close-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>window close</strong> — Success</p>
+  </div>
 </div>
 
 <h3>❌ Failure Cases</h3>
 <div class="video-grid">
   <div class="video-item">
-    <video controls muted playsinline><source src="videos/hammer.mp4" type="video/mp4"></video>
-    <p><strong>hammer</strong> — Failed (missed nail)</p>
+    <video controls muted playsinline><source src="assets/videos/reach-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>reach</strong> — Mostly failed (1/5 succeeded) </p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/pick-place-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>pick and place</strong> — Consistently failed (0/5 succeeded) </p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/peg-insert-side-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>peg insert side</strong> —  Occasional success (3/5 episodes) </p>
   </div>
 </div>
 
