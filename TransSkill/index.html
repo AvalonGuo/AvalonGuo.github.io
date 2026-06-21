@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TransparentSkill: A Semantic Latent Skill Interface for Hierarchical Multi-Task Manipulation</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      color: #222;
+      background: white;
+    }
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 0.3rem;
+    }
+    .authors {
+      font-size: 1.1em;
+      margin-bottom: 1.2rem;
+      color: #444;
+    }
+    .authors a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .authors a:hover {
+      text-decoration: underline;
+    }
+    .links {
+      margin: 1rem 0 1.8rem;
+    }
+    .links a:not(.btn) {
+      margin-right: 1.2rem;
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .links a:not(.btn):hover {
+      text-decoration: underline;
+    }
+    h2 {
+      font-size: 1.4em;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    h2::before {
+      margin-right: 0.4rem;
+    }
+    p, ul {
+      margin-bottom: 1.2rem;
+    }
+    pre {
+      background: #f6f8fa;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.95em;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    }
+
+    hr {
+      margin: 2.5rem 0;
+      border: 0;
+      border-top: 1px solid #eee;
+    }
+    footer {
+      color: #777;
+      font-size: 0.9em;
+      text-align: center;
+    }
+    .links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1.2rem;
+      background-color: #1a1a1a;
+      color: white !important;
+      text-decoration: none;
+      border-radius: 20px;
+      font-size: 0.95em;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .btn:link,
+    .btn:visited,
+    .btn:active {
+      color: white !important;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      color: white !important;
+      text-decoration: none;           
+      background-color: #333;
+      transform: translateY(-1px);
+    }
+    .block {
+        background: #dddada;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 2rem auto;
+        max-width: 800px;
+        font-size: 1.1em;
+        line-height: 1.6;
+        color: #333;
+        text-align: left;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .content{
+        font-size: 1.1em;
+        line-height: 1.7;
+        color: #222;
+        margin-bottom: 1.5rem;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .video-item video {
+      width: 100%;
+      border-radius: 6px;
+      background: #000;
+    }
+    .video-item p {
+      text-align: center;
+      font-size: 0.9em;
+      margin-top: 0.3rem;
+      color: #333;
+    }
+
+    .variant-group {
+      margin: 1.5rem 0;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+    }
+    .variant-group:last-child {
+      border-bottom: none;
+    }
+    .variant-group h4 {
+      margin: 0 0 0.6rem 0;
+      font-size: 1.1em;
+      color: #444;
+    }
+    .variant-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .variant-row .video-item {
+      flex: 1 1 220px;
+      min-width: 180px;
+    }
+    .variant-label {
+      display: inline-block;
+      font-size: 0.8em;
+      background: #e8e8e8;
+      color: #555;
+      border-radius: 4px;
+      padding: 0.1em 0.5em;
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+<body>
+
+<h1 style="text-align: center;">
+  TransparentSkill: A Semantic Latent Skill Interface for Hierarchical Multi-Task Manipulation
+</h1>
+
+<div class="authors-container" style="text-align: center; margin-bottom: 1.5rem;">
+  <div class="links">
+    <span style="color: #777; font-size: 0.95em;">Anonymous submission for RA-L</span>
+  </div>
+</div>
+
+<blockquote class="block">
+  <p style="margin: 0;">
+    <span style="color: #000000; font-weight: bold;">TransparentSkill</span> learns a 
+    <span style="color: #d81b60; font-weight: bold;">semantically aligned continuous latent skill interface</span> 
+    from annotated expert demonstrations, enabling 
+    <span style="color: #d81b60; font-weight: bold;">interpretable hierarchical control</span>, 
+    <span style="color: #d81b60; font-weight: bold;">cross-task skill reuse</span>, 
+    and <span style="color: #000000; font-weight: bold;">effective early learning</span> 
+    on the MT10 multi-task manipulation benchmark. The same interface can be invoked on 
+    <span style="color: #000000; font-weight: bold;">simple real-robot tasks</span> 
+    with deployment-time stabilization.
+  </p>
+</blockquote>
+
+<h2>Abstract</h2>
+<p class="content">
+  Multi-task manipulation requires shared high-level abstractions, but existing policies remain 
+  opaque at the chunk-planning level. We present 
+  <strong>TransparentSkill</strong>, which learns a 
+  <strong>semantically aligned continuous latent skill interface</strong> 
+  from annotated expert chunks, then uses this interface for hierarchical control at the same 
+  chunk-level temporal granularity. On the MT10 benchmark, the learned interface shows 
+  effective early learning under a limited interaction budget and reaches strong final performance 
+  after extended training. On three simple real-robot tasks, the interface remains 
+  executable and interpretable under deployment-time stabilization.
+</p>
+
+<h2>🎨 Interpretable Policy Execution with Skill-Colored Trajectories</h2>
+<p>
+  Robot trajectories on MT10 tasks are visualized with colors indicating the 
+  atomic skill selected by the high-level policy at each step <strong>(one color = one skill)</strong>. 
+  We show 5 representative episodes per task, drawn from the standard 50-episode evaluation protocol.
+</p>
+
+<h3>✅ Successful Tasks</h3>
+<div class="video-grid">
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/push-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>push</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/door-open-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>door open</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/drawer-open-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>drawer open</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/drawer-close-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>drawer close</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/button-press-topdown-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>button press topdown</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/window-open-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>window open</strong> — Success</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/window-close-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>window close</strong> — Success</p>
+  </div>
+</div>
+
+<h3>❌ Failure Cases</h3>
+<div class="video-grid">
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/reach-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>reach</strong> — Mostly failed</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/pick-place-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>pick and place</strong> — Consistently failed</p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/peg-insert-side-v3_web.mp4" type="video/mp4"></video>
+    <p><strong>peg insert side</strong> — Occasional success</p>
+  </div>
+</div>
+
+<h2>🤖 Real-Robot Feasibility & Stabilization</h2>
+<p>
+  We evaluate whether the learned semantic skill interface can be invoked on hardware across three 
+  simple manipulation tasks: <strong>Lift banana</strong>, <strong>Close drawer</strong>, 
+  and <strong>Place banana into drawer</strong>. Each task is tested with three decoding variants:
+</p>
+<ul>
+  <li><strong>Direct latent</strong> — execute the planner-predicted latent command directly.</li>
+  <li><strong>Anchored + adapt (RL)</strong> — execute an anchored latent after limited hardware adaptation.</li>
+  <li><strong>No-light anchored (RL)</strong> — additional qualitative low-light rollouts using the same RL-adapted policy. These clips are not used as a quantitative robustness benchmark; they are included only to illustrate qualitative execution under a common visual variation in the real-robot setup (room lights turned off).</li>
+</ul>
+
+<div class="variant-group">
+  <h4>🍌 Lift banana</h4>
+  <div class="variant-row">
+    <div class="video-item">
+      <video controls muted playsinline><source src="assets/videos/real_lift_direct.mp4" type="video/mp4"></video>
+      <p><span class="variant-label">Direct latent</span><br><strong>Lift banana</strong></p>
+    </div>
+    <div class="video-item">
+      <video controls muted playsinline><source src="assets/videos/real_lift_anchored.mp4" type="video/mp4"></video>
+      <p><span class="variant-label">Anchored + adapt (RL)</span><br><strong>Lift banana</strong></p>
+    </div>
+    <div class="video-item">
+      <video controls muted playsinline><source src="assets/videos/real_lift_nolight.mp4" type="video/mp4"></video>
+      <p><span class="variant-label">No-light anchored (RL)</span><br><strong>Lift banana</strong></p>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group">
+  <h4>🗄️ Close drawer</h4>
+  <div class="variant-row">
+    <div class="video-item">
+      <video controls muted playsinline><source src="assets/videos/real_close_direct.mp4" type="video/mp4"></video>
+      <p><span class="variant-label">Direct latent</span><br><strong>Close drawer</strong></p>
+    </div>
+    <div class="video-item">
+      <video controls muted playsinline><source src="assets/videos/real_close_anchored.mp4" type="video/mp4"></video>
+      <p><span class="variant-label">Anchored + adapt (RL)</span><br><strong>Close drawer</strong></p>
+    </div>
+    <div class="video-item">
+      <video controls muted playsinline><source src="assets/videos/real_close_nolight.mp4" type="video/mp4"></video>
+      <p><span class="variant-label">No-light anchored (RL)</span><br><strong>Close drawer</strong></p>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group">
+  <h4>📦 Place banana into drawer</h4>
+  <div class="variant-row">
+    <div class="video-item">
+      <video controls muted playsinline><source src="assets/videos/real_place_direct.mp4" type="video/mp4"></video>
+      <p><span class="variant-label">Direct latent</span><br><strong>Place banana into drawer</strong></p>
+    </div>
+    <div class="video-item">
+      <video controls muted playsinline><source src="assets/videos/real_place_anchored.mp4" type="video/mp4"></video>
+      <p><span class="variant-label">Anchored + adapt (RL)</span><br><strong>Place banana into drawer</strong></p>
+    </div>
+    <div class="video-item">
+      <video controls muted playsinline><source src="assets/videos/real_place_nolight.mp4" type="video/mp4"></video>
+      <p><span class="variant-label">No-light anchored (RL)</span><br><strong>Place banana into drawer</strong></p>
+    </div>
+  </div>
+</div>
+
+<p>
+  These videos demonstrate that the same semantic interface can be executed on real hardware 
+  when paired with appropriate deployment-time stabilization, supporting the claim of 
+  <strong>interface usability</strong> rather than broad sim-to-real transfer.
+</p>
+
+<hr>
+<footer>
+</footer>
+
+</body>
+</html>
