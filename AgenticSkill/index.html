@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AgenticSkill：Agent 编排 + 强化学习的机器人操作技能 harness</title>
+  <script>document.documentElement.classList.add('has-js');</script>
   <style>
     :root {
       --bg: #070b12;
@@ -237,6 +238,54 @@
       background: #000;
     }
 
+    .video-frame {
+      position: relative;
+      border-radius: 9px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 45%, rgba(34, 211, 238, 0.16), #05080e 72%);
+    }
+
+    .video-frame video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 9px;
+      background: transparent;
+    }
+
+    .play-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #dff4ff;
+    }
+
+    .has-js .play-overlay { display: flex; }
+    .has-js .video-frame.is-loaded .play-overlay { display: none; }
+
+    .play-overlay::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 18px solid #e8fbff;
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.95));
+    }
+
+    .play-overlay::after { content: "PLAY"; }
+
     .video-item p {
       margin: 0.65rem 0 0;
       text-align: center;
@@ -350,32 +399,64 @@
 
 <div class="video-grid">
   <div class="video-item">
-    <video controls muted playsinline><source src="assets/videos/real_lift_direct.mp4" type="video/mp4"></video>
+    <div class="video-frame">
+      <video controls muted playsinline preload="none"><source src="assets/videos/real_lift_direct.webm" type="video/webm"><source src="assets/videos/real_lift_direct.mp4" type="video/mp4"></video>
+      <button class="play-overlay" type="button" aria-label="播放视频"></button>
+    </div>
     <p><span class="variant-label">Direct</span><br><strong>TASK 01 · 拿香蕉</strong><span class="card-note">未接入 AgenticSkill（baseline）</span></p>
   </div>
   <div class="video-item">
-    <video controls muted playsinline><source src="assets/videos/real_close_direct.mp4" type="video/mp4"></video>
+    <div class="video-frame">
+      <video controls muted playsinline preload="none"><source src="assets/videos/real_close_direct.webm" type="video/webm"><source src="assets/videos/real_close_direct.mp4" type="video/mp4"></video>
+      <button class="play-overlay" type="button" aria-label="播放视频"></button>
+    </div>
     <p><span class="variant-label">Direct</span><br><strong>TASK 02 · 关抽屉</strong><span class="card-note">未接入 AgenticSkill（baseline）</span></p>
   </div>
   <div class="video-item">
-    <video controls muted playsinline><source src="assets/videos/real_place_direct.mp4" type="video/mp4"></video>
+    <div class="video-frame">
+      <video controls muted playsinline preload="none"><source src="assets/videos/real_place_direct.webm" type="video/webm"><source src="assets/videos/real_place_direct.mp4" type="video/mp4"></video>
+      <button class="play-overlay" type="button" aria-label="播放视频"></button>
+    </div>
     <p><span class="variant-label">Direct</span><br><strong>TASK 03 · 把香蕉放进抽屉</strong><span class="card-note">未接入 AgenticSkill（baseline）</span></p>
   </div>
   <div class="video-item">
-    <video controls muted playsinline><source src="assets/videos/real_lift_anchored.mp4" type="video/mp4"></video>
+    <div class="video-frame">
+      <video controls muted playsinline preload="none"><source src="assets/videos/real_lift_anchored.webm" type="video/webm"><source src="assets/videos/real_lift_anchored.mp4" type="video/mp4"></video>
+      <button class="play-overlay" type="button" aria-label="播放视频"></button>
+    </div>
     <p><span class="variant-label">Anchored</span><br><strong>TASK 01 · 拿香蕉</strong><span class="card-note">接入 AgenticSkill（RL 适配后）</span></p>
   </div>
   <div class="video-item">
-    <video controls muted playsinline><source src="assets/videos/real_close_anchored.mp4" type="video/mp4"></video>
+    <div class="video-frame">
+      <video controls muted playsinline preload="none"><source src="assets/videos/real_close_anchored.webm" type="video/webm"><source src="assets/videos/real_close_anchored.mp4" type="video/mp4"></video>
+      <button class="play-overlay" type="button" aria-label="播放视频"></button>
+    </div>
     <p><span class="variant-label">Anchored</span><br><strong>TASK 02 · 关抽屉</strong><span class="card-note">接入 AgenticSkill（RL 适配后）</span></p>
   </div>
   <div class="video-item">
-    <video controls muted playsinline><source src="assets/videos/real_place_anchored.mp4" type="video/mp4"></video>
+    <div class="video-frame">
+      <video controls muted playsinline preload="none"><source src="assets/videos/real_place_anchored.webm" type="video/webm"><source src="assets/videos/real_place_anchored.mp4" type="video/mp4"></video>
+      <button class="play-overlay" type="button" aria-label="播放视频"></button>
+    </div>
     <p><span class="variant-label">Anchored</span><br><strong>TASK 03 · 把香蕉放进抽屉</strong><span class="card-note">接入 AgenticSkill（RL 适配后）</span></p>
   </div>
 </div>
 
 </main>
 
+<script>
+  document.querySelectorAll('.video-frame').forEach(function (frame) {
+    var video = frame.querySelector('video');
+    var overlay = frame.querySelector('.play-overlay');
+    if (!video) { return; }
+    function start() {
+      frame.classList.add('is-loaded');
+      var played = video.play();
+      if (played && played.catch) { played.catch(function () {}); }
+    }
+    if (overlay) { overlay.addEventListener('click', start); }
+    video.addEventListener('play', function () { frame.classList.add('is-loaded'); });
+  });
+</script>
 </body>
 </html>
