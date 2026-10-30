@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgenticSkill：Agent 编排 + 强化学习的机器人操作技能 harness</title>
+  <style>
+    :root {
+      --bg: #070b12;
+      --text: #e6edf7;
+      --body-text: #c3d3e8;
+      --muted: #8fa3bd;
+      --line: rgba(125, 211, 252, 0.16);
+      --cyan: #22d3ee;
+      --sky: #7dd3fc;
+      --violet: #a78bfa;
+      --pink: #f472b6;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { color-scheme: dark; }
+
+    body {
+      margin: 0;
+      padding: 4rem 1.5rem 5rem;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      color: var(--body-text);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(60rem 30rem at 10% -12%, rgba(34, 211, 238, 0.20), transparent 60%),
+        radial-gradient(52rem 26rem at 92% -4%, rgba(139, 92, 246, 0.22), transparent 58%),
+        radial-gradient(46rem 26rem at 50% 112%, rgba(244, 114, 182, 0.14), transparent 62%);
+      background-attachment: fixed;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(148, 197, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 197, 255, 0.055) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 76%);
+      mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 76%);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    ::selection { background: rgba(34, 211, 238, 0.32); }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(2.2rem, 6vw, 3.3rem);
+      letter-spacing: -0.02em;
+      background: linear-gradient(100deg, #7dd3fc 0%, #a78bfa 48%, #f472b6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 30px rgba(125, 211, 252, 0.28));
+    }
+
+    .subtitle {
+      max-width: 680px;
+      margin: 0.9rem auto 0;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+    .block {
+      position: relative;
+      margin: 2.4rem 0 0;
+      padding: 1.6rem 1.8rem;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: linear-gradient(160deg, rgba(30, 41, 59, 0.86), rgba(9, 14, 24, 0.78));
+      box-shadow:
+        0 0 0 1px rgba(34, 211, 238, 0.05),
+        0 26px 60px -32px rgba(56, 189, 248, 0.55);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      font-size: 1.02rem;
+    }
+
+    .block::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 18px;
+      bottom: 18px;
+      width: 3px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, var(--cyan), var(--violet));
+      box-shadow: 0 0 16px rgba(34, 211, 238, 0.75);
+    }
+
+    .block p { margin: 0; }
+
+    .brand {
+      color: #f4f8ff;
+      font-weight: 700;
+    }
+
+    .accent {
+      color: var(--sky);
+      font-weight: 700;
+      text-shadow: 0 0 20px rgba(34, 211, 238, 0.45);
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 3.2rem 0 1rem;
+      font-size: 1.12rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #eef5ff;
+    }
+
+    h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(125, 211, 252, 0.45), rgba(125, 211, 252, 0));
+    }
+
+    .section-index {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--cyan);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      border: 1px solid rgba(34, 211, 238, 0.38);
+      background: rgba(34, 211, 238, 0.08);
+      box-shadow: 0 0 18px -6px rgba(34, 211, 238, 0.95);
+    }
+
+    p { margin: 0 0 1rem; }
+
+    ul {
+      margin: 0 0 1.4rem;
+      padding-left: 1.1rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+      color: var(--body-text);
+    }
+
+    li::marker { color: var(--cyan); }
+
+    strong { color: #f2f7ff; font-weight: 600; }
+    .results-table {
+      width: 100%;
+      margin: 1.2rem 0 0;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      font-size: 0.95rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(13, 21, 36, 0.76);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 22px 52px -34px rgba(56, 189, 248, 0.6);
+    }
+
+    .results-table th,
+    .results-table td {
+      padding: 0.75rem 0.9rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(148, 197, 255, 0.10);
+    }
+
+    .results-table thead th {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9fb3cd;
+      background: rgba(34, 211, 238, 0.07);
+    }
+
+    .results-table tbody tr:last-child td { border-bottom: none; }
+    .results-table tbody tr:hover td { background: rgba(34, 211, 238, 0.05); }
+    .results-table td strong { color: #f4f8ff; font-variant-numeric: tabular-nums; }
+
+    .results-table .delta {
+      font-family: var(--mono);
+      font-weight: 700;
+      color: var(--pink);
+      text-shadow: 0 0 16px rgba(244, 114, 182, 0.55);
+      white-space: nowrap;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.2rem 0 0;
+    }
+
+    .video-item {
+      padding: 0.6rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: linear-gradient(170deg, rgba(30, 41, 59, 0.62), rgba(9, 14, 24, 0.85));
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .video-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(34, 211, 238, 0.5);
+      box-shadow: 0 20px 44px -24px rgba(34, 211, 238, 0.9);
+    }
+
+    .video-item video {
+      width: 100%;
+      display: block;
+      border-radius: 9px;
+      background: #000;
+    }
+
+    .video-item p {
+      margin: 0.65rem 0 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .video-item p strong { color: #dfe9f8; font-weight: 600; }
+
+    .card-note {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.76rem;
+      color: #8199b6;
+    }
+
+    .variant-label {
+      display: inline-block;
+      margin-bottom: 0.35rem;
+      padding: 0.12rem 0.55rem;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #04121b;
+      background: linear-gradient(100deg, var(--cyan), var(--sky));
+      box-shadow: 0 0 20px -6px rgba(34, 211, 238, 0.95);
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 2.6rem 1rem 3rem; }
+      .block { padding: 1.2rem 1.1rem 1.2rem 1.3rem; }
+      .results-table { font-size: 0.86rem; }
+      .results-table th,
+      .results-table td { padding: 0.6rem 0.55rem; }
+      .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 480px) {
+      .video-grid { grid-template-columns: 1fr; }
+    }
+
+    @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+      h1 { color: #a5b4fc; background: none; }
+    }
+  </style>
+</head>
+<body>
+
+<main class="page">
+
+<h1>AgenticSkill</h1>
+<p class="subtitle">
+  Agent 编排（System 2）+ 技能执行（System 1）+ 反思驱动的强化学习，把机器人操作技能做成可复用的 harness。
+</p>
+
+<blockquote class="block">
+  <p>
+    <span class="brand">AgenticSkill</span> 把机器人操作技能组织成一个可复用的 harness：
+    上层 agent（<span class="accent">System 2</span>）从观测与任务描述里读懂意图、编排技能，
+    下层每个技能自带的 policy（<span class="accent">System 1</span>）把技能编译成具体 action 并执行，
+    执行反馈再回流给 System 2 做反思与强化学习——
+    <span class="brand">新任务不必从零采数、重新训练。</span>
+  </p>
+</blockquote>
+
+<h2><span class="section-index">01</span>评测结果</h2>
+<p>
+  我们在 <strong>LIBERO 四套件</strong>与 <strong>3 个真机任务</strong>上评测 AgenticSkill，并与 Diffusion Policy baseline 对比：
+</p>
+<ul>
+  <li><strong>LIBERO 四套件：</strong>平均成功率达 <strong>96.0%</strong>，相比 Diffusion Policy 基线（<strong>72.4%</strong>）提升 <strong>23.6 个百分点</strong>。</li>
+  <li><strong>真机评测：</strong>3 个任务上相对 baseline 提升 <strong>20 个百分点</strong>。</li>
+</ul>
+
+<table class="results-table">
+  <thead>
+    <tr>
+      <th>评测设置</th>
+      <th>Baseline（Diffusion Policy）</th>
+      <th>AgenticSkill</th>
+      <th>提升</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>LIBERO（四套件平均成功率）</td>
+      <td>72.4%</td>
+      <td><strong>96.0%</strong></td>
+      <td class="delta">+23.6 pt</td>
+    </tr>
+    <tr>
+      <td>真机（3 个任务）</td>
+      <td>baseline</td>
+      <td><strong>baseline + 20 pt</strong></td>
+      <td class="delta">+20 pt</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2><span class="section-index">02</span>真机评测</h2>
+<p>
+  以下 3 个真机任务（<strong>拿香蕉</strong>、<strong>关抽屉</strong>、<strong>把香蕉放进抽屉</strong>）对比两种执行方式，
+  用于验证 System 2 的编排与 System 1 的执行能否直接落到硬件上：
+</p>
+<ul>
+  <li><strong>Direct（未接入 AgenticSkill，baseline）</strong>——直接执行原始技能指令，不经过我们的编排与 RL 适配。</li>
+  <li><strong>Anchored（接入 AgenticSkill，RL 适配后）</strong>——经 System 2 反思后完成 RL 适配，再执行锚定后的技能指令。</li>
+</ul>
+
+<div class="video-grid">
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/real_lift_direct.mp4" type="video/mp4"></video>
+    <p><span class="variant-label">Direct</span><br><strong>TASK 01 · 拿香蕉</strong><span class="card-note">未接入 AgenticSkill（baseline）</span></p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/real_close_direct.mp4" type="video/mp4"></video>
+    <p><span class="variant-label">Direct</span><br><strong>TASK 02 · 关抽屉</strong><span class="card-note">未接入 AgenticSkill（baseline）</span></p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/real_place_direct.mp4" type="video/mp4"></video>
+    <p><span class="variant-label">Direct</span><br><strong>TASK 03 · 把香蕉放进抽屉</strong><span class="card-note">未接入 AgenticSkill（baseline）</span></p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/real_lift_anchored.mp4" type="video/mp4"></video>
+    <p><span class="variant-label">Anchored</span><br><strong>TASK 01 · 拿香蕉</strong><span class="card-note">接入 AgenticSkill（RL 适配后）</span></p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/real_close_anchored.mp4" type="video/mp4"></video>
+    <p><span class="variant-label">Anchored</span><br><strong>TASK 02 · 关抽屉</strong><span class="card-note">接入 AgenticSkill（RL 适配后）</span></p>
+  </div>
+  <div class="video-item">
+    <video controls muted playsinline><source src="assets/videos/real_place_anchored.mp4" type="video/mp4"></video>
+    <p><span class="variant-label">Anchored</span><br><strong>TASK 03 · 把香蕉放进抽屉</strong><span class="card-note">接入 AgenticSkill（RL 适配后）</span></p>
+  </div>
+</div>
+
+</main>
+
+</body>
+</html>
